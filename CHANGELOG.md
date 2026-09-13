@@ -29,3 +29,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Remediated:** Cross-AZ inter-service chatter via AZ-affinity topology-aware routing ($2,920/mo savings).
 - **Appended:** `Storage Analysis` and `Data Transfer Analysis` tabs to `analysis/savings-model.xlsx`.
 - **Published:** `daily-logs/day-03.md`.
+
+### Stage 4: Reserved Capacity & Spot Strategy (Day 4)
+- **Audited:** 0.0% baseline RI/SP coverage across all 65 compute instances and 12 database clusters.
+- **Designed:** 1-Year Partial Upfront Compute Savings Plan ($18,000 upfront, 1.23-month payback) yielding $14,600/mo savings on steady-state production compute, plus $2,822.40/mo on RDS Reserved Instances.
+- **Architected:** Diversified Spot Fleets across 12 independent capacity pools (capacity-optimized allocation) with 20% on-demand base for asynchronous batch OCR and ETL pipelines ($4,000/mo savings).
+- **Modeled:** Spot interruption sensitivity across 5%, 10%, and 20% scenarios; verified sub-page S3 checkpointing keeps reprocessing overhead <$130/mo.
+- **Published:** `docs/ri-spot-strategy.md` and appended `Commitment & Spot` tab to `analysis/savings-model.xlsx`.
+- **Published:** `daily-logs/day-04.md`.
