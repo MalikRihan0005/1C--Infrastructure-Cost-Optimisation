@@ -21,3 +21,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Consolidated:** RDS reporting read-replica decommissioned in favor of S3/Athena lake ($1,411.20/mo savings); staging RDS converted to Single-AZ Graviton ($1,091.20/mo savings).
 - **Built:** `analysis/savings-model.xlsx` featuring `Executive Summary`, `Compute Analysis`, and `Database Analysis` tabs.
 - **Published:** `daily-logs/day-02.md`.
+
+### Stage 3: Storage & Data Transfer Analysis (Day 3)
+- **Added:** S3 lifecycle policy framework transitioning 145 TB of dormant KYC loan docs (>90d inactive) to Glacier Instant Retrieval ($1,850/mo savings) and audit logs to Glacier with WORM Object Lock ($1,250/mo savings).
+- **Remediated:** 4 unattached orphan EBS volumes (7,500 GB) deleted ($750/mo savings); 32,000 GB of attached GP2 converted to GP3 ($650/mo savings); DLM 30d snapshot retention policy enforced ($1,000/mo savings).
+- **Eliminated:** $7,560/mo in avoidable NAT Gateway data processing fees via AWS S3 Gateway VPC Endpoints.
+- **Remediated:** Cross-AZ inter-service chatter via AZ-affinity topology-aware routing ($2,920/mo savings).
+- **Appended:** `Storage Analysis` and `Data Transfer Analysis` tabs to `analysis/savings-model.xlsx`.
+- **Published:** `daily-logs/day-03.md`.
