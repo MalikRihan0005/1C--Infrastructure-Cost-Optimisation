@@ -76,3 +76,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Authored:** Tactical engineering manager dashboard (`dashboards/engineering-dashboard.html`) featuring fleet CPU/RAM telemetry, rightsizing action backlog, and squad showback scorecards.
 - **Authored:** Squad & microservice dashboard (`dashboards/team-dashboard.html`) showcasing real-time instance health, deployment cost deltas, and live scaling event feeds.
 - **Published:** `dashboards/` suite and `daily-logs/day-10.md`.
+
+### Stage 11: Review Process & FinOps Maturity (Day 11)
+- **Standardized:** 10-section Monthly Cloud Financial Report package featuring mandatory deep-dives into >10% variances, loan volume correlation, and regulatory sign-offs.
+- **Structured:** Quarterly Strategic Executive Review package covering 12-month trends, unit economics, and multi-year capital commitment renewals.
+- **Defined:** FinOps Maturity Model (Crawl $\rightarrow$ Walk $\rightarrow$ Run across Visibility, Optimisation, Commitments, Governance, Culture).
+- **Established:** Quantitative Enterprise FinOps OKRs (Cost reduction: $180k to $115.75k, $/loan: $0.346 to $0.223, Tagging >96%, Anomaly MTTD <2 hours, CSP utilisation >95%).
+- **Published:** `docs/review-process.md` and `daily-logs/day-11.md`.
