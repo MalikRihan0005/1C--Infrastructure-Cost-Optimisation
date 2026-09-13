@@ -83,3 +83,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Defined:** FinOps Maturity Model (Crawl $\rightarrow$ Walk $\rightarrow$ Run across Visibility, Optimisation, Commitments, Governance, Culture).
 - **Established:** Quantitative Enterprise FinOps OKRs (Cost reduction: $180k to $115.75k, $/loan: $0.346 to $0.223, Tagging >96%, Anomaly MTTD <2 hours, CSP utilisation >95%).
 - **Published:** `docs/review-process.md` and `daily-logs/day-11.md`.
+
+### Stage 12: Policy-as-Code & Automation (Day 12)
+- **Authored:** Syntactically valid AWS Service Control Policies: `policies/scp-gpu-restriction.json`, `policies/scp-region-restriction.json`, and `policies/scp-instance-cap.json`.
+- **Engineered:** AWS Config Conformance Pack (`policies/config-rules.yaml`) for continuous compliance auditing.
+- **Developed:** Reusable Terraform Cost Governance Module in `policies/terraform-cost-module/` with HCL regex validation, automated 10-tag mapping, and Infracost CI/CD pre-commit gates ($500/mo overrun blocker).
+- **Published:** `policies/` suite and `daily-logs/day-12.md`.
