@@ -50,3 +50,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Designed:** Hybrid 3-tier detection framework (Sub-hour CloudWatch proxy alarms, Lambda Modified Z-Score with salary-day surge awareness, and AWS ML Cost Anomaly Detection).
 - **Established:** 4-tier severity matrix (P1 Critical through P4 Low) with SLAs, automated PagerDuty/Slack routing, and 5-step operational Anomaly Investigation Runbook.
 - **Published:** `docs/anomaly-detection.md` and `daily-logs/day-06.md`.
+
+### Stage 7: Consolidated Cost Audit & Savings Model (Day 7)
+- **Synthesised:** Master AWS Cost Audit Report (`docs/cost-audit-report.md`) detailing baseline spend ($180,000/mo), gross waste ($70,850/mo), net savings waterfall ($64,250/mo), and 90-day realization timeline.
+- **Engineered:** Catalog of 16 prioritized optimisation recommendations (`docs/optimisation-recommendations.md`) complete with technical solutions, compliance assessments, and Impact vs Effort matrix.
+- **Reconciled:** Probabilistic scenario modeling in `analysis/savings-model.xlsx` (Expected: $64,250/mo; Best-Case: $71,800/mo; Worst-Case: $56,400/mo).
+- **Published:** `docs/cost-audit-report.md`, `docs/optimisation-recommendations.md`, and `daily-logs/day-07.md`.
