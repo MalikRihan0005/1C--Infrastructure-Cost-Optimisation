@@ -37,3 +37,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Modeled:** Spot interruption sensitivity across 5%, 10%, and 20% scenarios; verified sub-page S3 checkpointing keeps reprocessing overhead <$130/mo.
 - **Published:** `docs/ri-spot-strategy.md` and appended `Commitment & Spot` tab to `analysis/savings-model.xlsx`.
 - **Published:** `daily-logs/day-04.md`.
+
+### Stage 5: Tagging & Cost Allocation Governance (Day 5)
+- **Audited:** 58.2% baseline tag compliance in `data/tag_compliance_report.csv`, identifying $75,420.00/month in unallocated dark spend.
+- **Designed:** Enterprise 10-tag mandatory taxonomy (`business_unit`, `product`, `environment`, `cost_centre`, `team`, `service`, `created_by`, `ttl`, `compliance_scope`, `data_classification`).
+- **Engineered:** 4-layer governance model (Preventive, Detective, Corrective, Audit & Showback) and proportional shared-cost allocation math.
+- **Authored:** `policies/scp-mandatory-tags.json` and `policies/config-rules.yaml`.
+- **Published:** `docs/tagging-taxonomy.md` and `daily-logs/day-05.md`.
