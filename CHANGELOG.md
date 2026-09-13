@@ -56,3 +56,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Engineered:** Catalog of 16 prioritized optimisation recommendations (`docs/optimisation-recommendations.md`) complete with technical solutions, compliance assessments, and Impact vs Effort matrix.
 - **Reconciled:** Probabilistic scenario modeling in `analysis/savings-model.xlsx` (Expected: $64,250/mo; Best-Case: $71,800/mo; Worst-Case: $56,400/mo).
 - **Published:** `docs/cost-audit-report.md`, `docs/optimisation-recommendations.md`, and `daily-logs/day-07.md`.
+
+### Stage 8: Auto-Scaling Architecture (Day 8)
+- **Architected:** Asymmetric auto-scaling framework (60s scale-out cooldown, 300s-600s scale-in cooldown, 60s ELB connection draining) across 6 core microservices.
+- **Deployed:** Predictive and scheduled scaling for borrower salary-day spikes (1st and 15th of the month) pre-warming capacity to eliminate transaction drop-offs.
+- **Implemented:** Scheduled scaling for development and staging fleets (9 AM - 7 PM weekdays, stopped on weekends) capturing $8,200.00/month in idle compute waste.
+- **Authored:** `policies/auto-scaling-loan-api.json`, `policies/auto-scaling-batch-ocr.json`, and `policies/auto-scaling-scheduled-dev.json`.
+- **Published:** `docs/auto-scaling-policies.md` and `daily-logs/day-08.md`.
