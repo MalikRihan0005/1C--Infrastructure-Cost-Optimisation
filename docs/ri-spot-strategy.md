@@ -22,7 +22,7 @@ Baseline Spend Profile (Month 12):
 ```
 
 This strategy establishes a two-pronged financial and architectural mechanism:
-1. **Commitment Optimization:** Procuring 1-Year Partial Upfront **Compute Savings Plans (CSP)** and RDS Reserved Instances covering 75% of steady-state post-rightsizing production baseline, achieving **$17,422.40/month in net savings** ($14,600.00 from EC2 CSP and $2,822.40 from RDS RIs).
+1. **Commitment Optimisation:** Procuring 1-Year Partial Upfront **Compute Savings Plans (CSP)** and RDS Reserved Instances covering 75% of steady-state post-rightsizing production baseline, achieving **$17,422.40/month in net savings** ($14,600.00 from EC2 CSP and $2,822.40 from RDS RIs).
 2. **Spot Instance Orchestration:** Migrating asynchronous, fault-tolerant batch workloads (KYC OCR document extraction, daily credit risk simulations, ML feature store generation) to diversified Auto Scaling Spot Fleets, saving **$4,000.00/month**.
 
 Combined, this strategy delivers **$21,422.40/month in recurring bottom-line savings**.
