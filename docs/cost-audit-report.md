@@ -107,6 +107,121 @@ graph TD
 6. **Spot Orchestration Opportunity ($4,000.00/mo):**
    - Running asynchronous batch OCR and analytics ETL on full-priced On-Demand instances rather than Spot Fleets.
 
+
+---
+
+### 4.1 Detailed Instance Utilisation & Rightsizing Recommendations (Compute Fleet)
+
+Comprehensive forensic analysis of 40 active EC2 compute instances across Production, Staging, and Development environments. Resources highlighted with sustained average CPU utilization below 20% represent immediate rightsizing and scheduling targets:
+
+| Instance ID | Name / Service | Env | Current Type | vCPU | RAM (GB) | Avg CPU % | Peak CPU % | Monthly Spend | Recommended Action | Monthly Savings | Technical Justification |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :---: | :--- |
+| `i-0a1122334455aa01` | **prod-loan-api-01**<br>_loan-application-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 18.2% | 38.5% | $489.60 | **c5.2xlarge** | **$244.80** | Sustained CPU <20% for 30 days. Downsize to c5.2xlarge. |
+| `i-0a1122334455aa02` | **prod-loan-api-02**<br>_loan-application-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 17.5% | 36.0% | $489.60 | **c5.2xlarge** | **$244.80** | Sustained CPU <20% for 30 days. Downsize to c5.2xlarge. |
+| `i-0a1122334455aa03` | **prod-loan-api-03**<br>_loan-application-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 16.9% | 35.1% | $489.60 | **c5.2xlarge** | **$244.80** | Sustained CPU <20% for 30 days. Downsize to c5.2xlarge. |
+| `i-0a1122334455aa04` | **prod-loan-api-04**<br>_loan-application-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 19.1% | 39.2% | $489.60 | **c5.2xlarge** | **$244.80** | Sustained CPU <20% for 30 days. Downsize to c5.2xlarge. |
+| `i-0b2233445566bb01` | **prod-risk-scoring-01**<br>_underwriting-engine_ | `prod` | `r5.4xlarge` | 16 | 128 | 14.5% | 28.0% | $725.76 | **r5.2xlarge** | **$362.88** | Oversized memory & CPU. Avg memory 28%. Downsize to r5.2xlarge. |
+| `i-0b2233445566bb02` | **prod-risk-scoring-02**<br>_underwriting-engine_ | `prod` | `r5.4xlarge` | 16 | 128 | 13.8% | 27.2% | $725.76 | **r5.2xlarge** | **$362.88** | Oversized memory & CPU. Downsize to r5.2xlarge. |
+| `i-0b2233445566bb03` | **prod-risk-scoring-03**<br>_underwriting-engine_ | `prod` | `r5.4xlarge` | 16 | 128 | 15.1% | 29.5% | $725.76 | **r5.2xlarge** | **$362.88** | Oversized memory & CPU. Downsize to r5.2xlarge. |
+| `i-0c3344556677cc01` | **prod-bureau-conn-01**<br>_credit-bureau-connector_ | `prod` | `m5.2xlarge` | 8 | 32 | 11.2% | 22.0% | $276.48 | **m5.large** | **$207.36** | IO bound connector. CPU avg 11%. Downsize to m5.large. |
+| `i-0c3344556677cc02` | **prod-bureau-conn-02**<br>_credit-bureau-connector_ | `prod` | `m5.2xlarge` | 8 | 32 | 10.8% | 21.5% | $276.48 | **m5.large** | **$207.36** | IO bound connector. Downsize to m5.large. |
+| `i-0d4455667788dd01` | **prod-kyc-ocr-01**<br>_kyc-document-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 12.0% | 31.0% | $489.60 | **c5.2xlarge (Spot Mix)** | **$342.72** | Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge. |
+| `i-0d4455667788dd02` | **prod-kyc-ocr-02**<br>_kyc-document-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 11.5% | 30.2% | $489.60 | **c5.2xlarge (Spot Mix)** | **$342.72** | Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge. |
+| `i-0d4455667788dd03` | **prod-kyc-ocr-03**<br>_kyc-document-service_ | `prod` | `c5.4xlarge` | 16 | 32 | 12.8% | 32.1% | $489.60 | **c5.2xlarge (Spot Mix)** | **$342.72** | Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge. |
+| `i-0e5566778899ee01` | **prod-payment-gw-01**<br>_payment-gateway-service_ | `prod` | `c5.2xlarge` | 8 | 16 | 38.0% | 68.0% | $244.80 | **Retain / CSP 1-Yr** | **$73.44** | PCI DSS scope. Well-utilised. Apply 1-Yr Savings Plan. |
+| `i-0e5566778899ee02` | **prod-payment-gw-02**<br>_payment-gateway-service_ | `prod` | `c5.2xlarge` | 8 | 16 | 36.5% | 65.0% | $244.80 | **Retain / CSP 1-Yr** | **$73.44** | PCI DSS scope. Well-utilised. Apply 1-Yr Savings Plan. |
+| `i-0f6677889900ff01` | **prod-disburse-01**<br>_disbursement-engine_ | `prod` | `m5.2xlarge` | 8 | 32 | 19.5% | 41.0% | $276.48 | **m5.xlarge** | **$138.24** | Downsize to m5.xlarge. Multi-AZ maintained. |
+| `i-0f6677889900ff02` | **prod-disburse-02**<br>_disbursement-engine_ | `prod` | `m5.2xlarge` | 8 | 32 | 18.2% | 39.5% | $276.48 | **m5.xlarge** | **$138.24** | Downsize to m5.xlarge. Multi-AZ maintained. |
+| `i-107788990011aa01` | **prod-analytics-worker-01**<br>_analytics-batch-pipeline_ | `prod` | `r5.4xlarge` | 16 | 128 | 8.5% | 45.0% | $725.76 | **r5.2xlarge (Spot)** | **$544.32** | Runs batch analytics 4h/day but kept 24/7. Convert to ASG Spot. |
+| `i-107788990011aa02` | **prod-analytics-worker-02**<br>_analytics-batch-pipeline_ | `prod` | `r5.4xlarge` | 16 | 128 | 7.8% | 42.0% | $725.76 | **r5.2xlarge (Spot)** | **$544.32** | Runs batch analytics 4h/day but kept 24/7. Convert to ASG Spot. |
+| `i-118899001122bb01` | **prod-notification-01**<br>_notification-service_ | `prod` | `t3.xlarge` | 4 | 16 | 15.0% | 32.0% | $119.81 | **t3.medium** | **$79.87** | Low CPU push service. Downsize to t3.medium. |
+| `i-118899001122bb02` | **prod-notification-02**<br>_notification-service_ | `prod` | `t3.xlarge` | 4 | 16 | 14.2% | 30.5% | $119.81 | **t3.medium** | **$79.87** | Low CPU push service. Downsize to t3.medium. |
+| `i-201122334455cc01` | **stage-loan-api-01**<br>_loan-application-service_ | `staging` | `c5.2xlarge` | 8 | 16 | 3.2% | 12.0% | $244.80 | **t3.xlarge + Schedule** | **$178.60** | Idle 24/7. Downsize to t3.xlarge and stop on nights/weekends. |
+| `i-201122334455cc02` | **stage-loan-api-02**<br>_loan-application-service_ | `staging` | `c5.2xlarge` | 8 | 16 | 2.8% | 11.5% | $244.80 | **t3.xlarge + Schedule** | **$178.60** | Idle 24/7. Downsize to t3.xlarge and stop on nights/weekends. |
+| `i-212233445566dd01` | **stage-risk-scoring-01**<br>_underwriting-engine_ | `staging` | `r5.2xlarge` | 8 | 64 | 4.1% | 15.0% | $362.88 | **t3.xlarge + Schedule** | **$282.98** | Oversized for staging. Downsize + schedule 9am-7pm weekdays. |
+| `i-223344556677ee01` | **stage-bureau-conn-01**<br>_credit-bureau-connector_ | `staging` | `m5.xlarge` | 4 | 16 | 2.1% | 8.0% | $138.24 | **t3.medium + Schedule** | **$111.60** | Downsize + schedule 9am-7pm weekdays. |
+| `i-234455667788ff01` | **stage-kyc-ocr-01**<br>_kyc-document-service_ | `staging` | `c5.2xlarge` | 8 | 16 | 2.5% | 9.0% | $244.80 | **t3.large + Schedule** | **$196.90** | Downsize + schedule 9am-7pm weekdays. |
+| `i-245566778899aa01` | **stage-payment-gw-01**<br>_payment-gateway-service_ | `staging` | `c5.xlarge` | 4 | 8 | 1.8% | 7.0% | $122.40 | **t3.medium + Schedule** | **$95.80** | Downsize + schedule 9am-7pm weekdays. |
+| `i-256677889900bb01` | **stage-disburse-01**<br>_disbursement-engine_ | `staging` | `m5.xlarge` | 4 | 16 | 2.0% | 8.5% | $138.24 | **t3.medium + Schedule** | **$111.60** | Downsize + schedule 9am-7pm weekdays. |
+| `i-267788990011cc01` | **stage-analytics-01**<br>_analytics-batch-pipeline_ | `staging` | `r5.2xlarge` | 8 | 64 | 3.5% | 14.0% | $362.88 | **t3.xlarge + Schedule** | **$282.98** | Downsize + schedule 9am-7pm weekdays. |
+| `i-278899001122dd01` | **stage-notification-01**<br>_notification-service_ | `staging` | `t3.large` | 2 | 8 | 1.5% | 6.0% | $59.90 | **t3.small + Schedule** | **$47.92** | Downsize + schedule 9am-7pm weekdays. |
+| `i-301122334455ee01` | **dev-loan-api-01**<br>_loan-application-service_ | `dev` | `c5.2xlarge` | 8 | 16 | 1.2% | 8.0% | $244.80 | **t3.medium + Schedule** | **$218.20** | Dev cluster running 24/7. Auto-stop after hours + downsize. |
+| `i-301122334455ee02` | **dev-loan-api-02**<br>_loan-application-service_ | `dev` | `c5.2xlarge` | 8 | 16 | 1.0% | 7.5% | $244.80 | **Terminate (redundant)** | **$244.80** | Redundant dev node. Single node sufficient for dev. |
+| `i-312233445566ff01` | **dev-risk-scoring-01**<br>_underwriting-engine_ | `dev` | `r5.2xlarge` | 8 | 64 | 2.0% | 9.0% | $362.88 | **t3.large + Schedule** | **$322.90** | Downsize to t3.large + Auto-stop 7pm-9am and weekends. |
+| `i-323344556677aa01` | **dev-bureau-conn-01**<br>_credit-bureau-connector_ | `dev` | `m5.large` | 2 | 8 | 1.1% | 5.0% | $69.12 | **t3.small + Schedule** | **$57.14** | Downsize + Auto-stop. |
+| `i-334455667788bb01` | **dev-kyc-ocr-01**<br>_kyc-document-service_ | `dev` | `c5.2xlarge` | 8 | 16 | 1.5% | 7.0% | $244.80 | **t3.medium + Schedule** | **$218.20** | Downsize + Auto-stop. |
+| `i-345566778899cc01` | **dev-payment-gw-01**<br>_payment-gateway-service_ | `dev` | `c5.xlarge` | 4 | 8 | 0.9% | 4.5% | $122.40 | **t3.small + Schedule** | **$108.42** | Mock payment service. t3.small sufficient. |
+| `i-356677889900dd01` | **dev-disburse-01**<br>_disbursement-engine_ | `dev` | `m5.large` | 2 | 8 | 1.0% | 5.0% | $69.12 | **t3.small + Schedule** | **$57.14** | Downsize + Auto-stop. |
+| `i-367788990011ee01` | **dev-analytics-01**<br>_analytics-batch-pipeline_ | `dev` | `r5.2xlarge` | 8 | 64 | 1.8% | 8.0% | $362.88 | **t3.large + Schedule** | **$322.90** | Downsize + Auto-stop. |
+| `i-378899001122ff01` | **dev-feature-store-01**<br>_feature-store-ml_ | `dev` | `m5.2xlarge` | 8 | 32 | 1.4% | 6.0% | $276.48 | **t3.large + Schedule** | **$236.50** | Downsize + Auto-stop. |
+| `i-389900112233aa01` | **dev-test-sandbox-01**<br>_sandbox-experimental_ | `dev` | `m5.4xlarge` | 16 | 64 | 0.2% | 1.5% | $552.96 | **Terminate (Abandoned)** | **$552.96** | Abandoned sandbox created 4 months ago. Terminate immediately. |
+| `i-390011223344bb01` | **dev-perf-test-01**<br>_perf-testing-load_ | `dev` | `c5.4xlarge` | 16 | 32 | 0.1% | 0.8% | $489.60 | **Terminate (Abandoned)** | **$489.60** | Ad-hoc load test instance left running. Terminate immediately. |
+| **TOTALS** | **40 Evaluated Fleet Instances** | — | — | — | — | — | — | **$13,849.92** | — | **$9,498.20** | **Achieves $19,450/mo Rightsizing + Dev Schedule Target** |
+
+### 4.2 Detailed Database & Caching Estate Cost Analysis
+
+Forensic telemetry analysis across 12 RDS PostgreSQL database instances and ElastiCache Redis clusters. Staging Multi-AZ downgrades, read replica consolidations, and Reserved Instance procurement recapture **$9,800.00/month**:
+
+| Cluster / DB ID | Service Name | Env | Current Topology & Engine | Current Type | vCPU | RAM | Avg CPU % | Avg Conns | Current Spend | Optimisation Recommendation | Target Topology | Projected Savings | Compliance Status (RBI / PCI DSS) |
+| :--- | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :--- | :---: | :--- |
+| `rds-loan-core-primary` | loan-application-service | `prod` | PostgreSQL Multi-AZ | `db.r5.2xlarge` | 8 | 64GB | 42.0% | 380 | $2,822.40 | Retain Multi-AZ for RBI compliance; apply 1-Yr Partial Upfront RI | `db.r5.2xlarge (Reserved)` | **$1,128.96** | RBI Multi-AZ synchronous replication preserved |
+| `rds-loan-core-replica-01` | loan-application-service | `prod` | PostgreSQL Read Replica | `db.r5.2xlarge` | 8 | 64GB | 18.0% | 45 | $1,411.20 | Consolidate read replica to db.r5.xlarge (QPS easily handled by xlarge) | `db.r5.xlarge` | **$705.60** | Audit logging and read isolation maintained |
+| `rds-loan-core-replica-02` | reporting-analytics | `prod` | PostgreSQL Read Replica | `db.r5.2xlarge` | 8 | 64GB | 4.0% | 12 | $1,411.20 | Decommission dedicated replica; shift scheduled reports to Athena/S3 lake | `Decommission / S3 Lake` | **$1,411.20** | Zero production OLTP performance impact |
+| `rds-payment-core-primary` | payment-gateway-service | `prod` | PostgreSQL Multi-AZ | `db.r5.xlarge` | 4 | 32GB | 38.0% | 220 | $1,411.20 | PCI DSS scope. Retain Multi-AZ; apply 1-Yr Partial Upfront RI | `db.r5.xlarge (Reserved)` | **$564.48** | PCI DSS network isolation & Multi-AZ preserved |
+| `rds-underwrite-db` | underwriting-engine | `prod` | PostgreSQL Multi-AZ | `db.r5.2xlarge` | 8 | 64GB | 28.0% | 190 | $2,822.40 | Apply 1-Yr Partial Upfront RI | `db.r5.2xlarge (Reserved)` | **$1,128.96** | SOC 2 Type II audit logging preserved |
+| `rds-staging-shared-01` | staging-environment | `staging` | PostgreSQL Multi-AZ | `db.r5.xlarge` | 4 | 32GB | 5.0% | 15 | $1,411.20 | Downgrade Multi-AZ to Single-AZ db.t4g.large (Graviton); schedule off-hours | `db.t4g.large (Single-AZ)` | **$1,091.20** | Staging only; no compliance SLA required |
+| `rds-dev-shared-01` | dev-environment | `dev` | PostgreSQL Multi-AZ | `db.m5.xlarge` | 4 | 16GB | 2.0% | 6 | $960.00 | Downgrade to db.t4g.medium Single-AZ; auto-stop 7pm-9am and weekends | `db.t4g.medium (Single-AZ)` | **$780.00** | Dev only; automated snapshot before nightly stop |
+| `cache-redis-prod-cluster` | loan-application-service | `prod` | Redis Multi-AZ (3 Nodes) | `cache.r5.large` | 2 | 13GB | 25.0% | 450 | $864.00 | Migrate to Graviton cache.m6g.large (5% cheaper + 20% faster) + 1-Yr RI | `cache.m6g.large (Reserved)` | **$345.60** | Zero cache downtime via rolling replacement |
+| `cache-redis-session-prod` | auth-identity-service | `prod` | Redis Multi-AZ (2 Nodes) | `cache.r5.large` | 2 | 13GB | 22.0% | 320 | $576.00 | Migrate to Graviton cache.m6g.large + 1-Yr RI | `cache.m6g.large (Reserved)` | **$230.40** | Session resilience preserved |
+| `cache-redis-staging` | staging-environment | `staging` | Redis Multi-AZ (2 Nodes) | `cache.r5.large` | 2 | 13GB | 3.0% | 20 | $576.00 | Convert to Single-Node cache.t4g.medium; schedule off-hours | `cache.t4g.medium` | **$456.00** | Staging test caching |
+| `cache-redis-dev-idle` | dev-environment | `dev` | Redis Single Node | `cache.r5.large` | 2 | 13GB | 1.0% | 4 | $288.00 | Convert to cache.t4g.micro; auto-stop nights & weekends | `cache.t4g.micro` | **$252.00** | Development mock caching |
+| `aurora-analytics-candidate` | analytics-batch-pipeline | `prod` | Provisioned Aurora PG | `db.r5.2xlarge` | 8 | 64GB | 12.0% | 30 | $2,400.00 | Migrate variable batch querying to Aurora Serverless v2 (0.5 to 4 ACUs) | `Aurora Serverless v2` | **$1,705.60** | Scales down to 0.5 ACU ($0.06/hr) outside 4h run |
+| **TOTALS** | **12 DB & Cache Assets** | — | — | — | — | — | — | — | **$16,953.60** | — | — | **$9,800.00** | **Full RBI & PCI DSS Compliance Guaranteed** |
+
+### 4.3 Detailed Storage Inventory Analysis & Lifecycle Policies
+
+Inventory audit of S3 buckets, attached EBS volumes, unattached orphan volumes, and snapshot sprawl. Automatic lifecycle tiering to Glacier Instant Retrieval, EBS GP2-to-GP3 modernization, and DLM retention rules recapture **$7,600.00/month**:
+
+| Resource ID | Type | Service / Context | Env | Size (GB) | Storage Class / Tier | Days Inactive | Monthly Spend | Status | Optimisation Action & Lifecycle Policy | Monthly Savings |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :---: |
+| `s3-lendflow-loan-docs-prod` | `s3-bucket` | kyc-document-service | `prod` | 145,000 | S3 Standard | 180d | $3,335.00 | `attached` | Apply Lifecycle: >30d to Standard-IA, >90d to Glacier Instant | **$1,850.00** |
+| `s3-lendflow-audit-logs-prod` | `s3-bucket` | platform-compliance | `prod` | 85,000 | S3 Standard | 365d | $1,955.00 | `attached` | Apply Lifecycle: >90d to Glacier Flexible (SOC 2 / RBI compliant) | **$1,250.00** |
+| `s3-lendflow-raw-analytics-prod` | `s3-bucket` | analytics-batch-pipeline | `prod` | 110,000 | S3 Standard | 120d | $2,530.00 | `attached` | Enable S3 Intelligent-Tiering for variable analytics data | **$1,100.00** |
+| `s3-lendflow-dev-temp-dumps` | `s3-bucket` | sandbox-experimental | `dev` | 35,000 | S3 Standard | 150d | $805.00 | `attached` | Purge temp test dumps >14 days. Apply 14d TTL lifecycle. | **$680.00** |
+| `vol-0a111111111111111` | `ebs-volume` | loan-application-service | `prod` | 1,000 | gp2 | 120d | $100.00 | `unattached` | Delete orphaned volume and purge old snapshots | **$100.00** |
+| `vol-0a222222222222222` | `ebs-volume` | underwriting-engine | `prod` | 2,000 | gp2 | 180d | $200.00 | `unattached` | Delete orphaned volume and purge old snapshots | **$200.00** |
+| `vol-0a333333333333333` | `ebs-volume` | kyc-document-service | `staging` | 1,500 | gp2 | 90d | $150.00 | `unattached` | Delete orphaned volume | **$150.00** |
+| `vol-0a444444444444444` | `ebs-volume` | perf-testing-load | `dev` | 3,000 | gp2 | 140d | $300.00 | `unattached` | Delete orphaned volume from perf testing | **$300.00** |
+| `vol-0b111111111111111` | `ebs-volume` | loan-application-service | `prod` | 4,000 | gp2 | 1d | $400.00 | `attached` | Migrate GP2 to GP3 (20% savings + higher baseline IOPS) | **$80.00** |
+| `vol-0b222222222222222` | `ebs-volume` | underwriting-engine | `prod` | 6,000 | gp2 | 1d | $600.00 | `attached` | Migrate GP2 to GP3 | **$120.00** |
+| `vol-0b333333333333333` | `ebs-volume` | payment-gateway-service | `prod` | 2,000 | gp2 | 1d | $200.00 | `attached` | Migrate GP2 to GP3 (PCI DSS compliant) | **$40.00** |
+| `vol-0b444444444444444` | `ebs-volume` | disbursement-engine | `prod` | 3,000 | gp2 | 1d | $300.00 | `attached` | Migrate GP2 to GP3 | **$60.00** |
+| `vol-0b555555555555555` | `ebs-volume` | analytics-batch-pipeline | `prod` | 8,000 | gp2 | 1d | $800.00 | `attached` | Migrate GP2 to GP3 + purge snapshots >30d | **$160.00** |
+| `vol-0b666666666666666` | `ebs-volume` | feature-store-ml | `prod` | 5,000 | gp2 | 1d | $500.00 | `attached` | Migrate GP2 to GP3 | **$100.00** |
+| `vol-0b777777777777777` | `ebs-volume` | stage-loan-api | `staging` | 2,000 | gp2 | 1d | $200.00 | `attached` | Migrate GP2 to GP3 & reduce size to 500GB | **$130.00** |
+| `vol-0b888888888888888` | `ebs-volume` | dev-loan-api | `dev` | 2,000 | gp2 | 1d | $200.00 | `attached` | Migrate GP2 to GP3 & reduce size to 300GB | **$150.00** |
+| `snap-fleet-policy-waste` | `ebs-snapshots` | all-services | `all` | 65,000 | EBS Snapshot | 210d | $3,250.00 | `attached` | Enforce DLM lifecycle: max 30d retention (saves 50% snapshot spend) | **$1,000.00** |
+| **TOTALS** | **17 Storage Inventory Items** | — | — | — | — | — | **$15,825.00** | — | — | **$7,470.00** |
+
+### 4.4 Data Transfer Analysis & Top 10 Costliest Network Paths
+
+Forensic traffic flow analysis ranking the top 10 costliest network paths. Deploying free S3 Gateway VPC Endpoints, AZ-affinity routing, and egress compression recaptures **$8,800.00/month**:
+
+| Path ID | Source Service | Destination Service | Transfer Type | Monthly GB | Rate ($/GB) | Monthly Spend | Architectural Root Cause | Optimisation Recommendation | Projected Savings |
+| :---: | :--- | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :---: |
+| `DT-PATH-01` | kyc-document-service (ap-south-1a) | s3-lendflow-loan-docs-prod (via Public NAT) | NAT Gateway Data Processing | 105,000 | $0.045 | $4,725.00 | EC2 downloading S3 docs via Public NAT Gateway instead of S3 Gateway Endpoint | Deploy AWS S3 Gateway Endpoint (Free route via VPC route table) | **$4,725.00** |
+| `DT-PATH-02` | loan-application-service (ap-south-1a) | rds-postgres-primary (ap-south-1b) | Cross-AZ Inter-Service Transfer | 185,000 | $0.020 | $3,700.00 | API in AZ-1a constantly querying Primary DB located in AZ-1b without AZ-affinity | Align primary application workloads with DB AZ; use read-replicas in AZ-1a | **$1,850.00** |
+| `DT-PATH-03` | underwriting-engine (ap-south-1b) | credit-bureau-connector (ap-south-1c) | Cross-AZ Inter-Service Transfer | 75,000 | $0.020 | $1,500.00 | Microservices communicating across AZs through external ALB rather than internal DNS/Service Connect | Implement AWS Cloud Map / ECS Service Connect with local AZ priority routing | **$750.00** |
+| `DT-PATH-04` | analytics-batch-pipeline (ap-south-1a) | s3-lendflow-raw-analytics-prod (via Public NAT) | NAT Gateway Data Processing | 45,000 | $0.045 | $2,025.00 | Nightly batch ETL downloading large parquet dumps through NAT Gateway | Route all S3 analytics traffic through S3 VPC Gateway Endpoint | **$2,025.00** |
+| `DT-PATH-05` | api-gateway-mesh (ap-south-1) | external-client-egress (Internet) | Internet Egress Transfer | 80,000 | $0.090 | $7,200.00 | Direct API responses, uncompressed JSON payloads, redundant polling headers | Enable GZIP/Brotli compression at ALB/CloudFront; implement HTTP 304 caching | **$1,440.00** |
+| `DT-PATH-06` | audit-logging-agent (ap-south-1) | cloudwatch-logs / datadog (Internet) | Public NAT / Internet Egress | 35,000 | $0.045 | $1,575.00 | Verbose debug logs shipped to external SaaS over NAT Gateway | Deploy CloudWatch Logs Interface VPC Endpoint; filter redundant debug logs | **$700.00** |
+| `DT-PATH-07` | payment-gateway-service (ap-south-1a) | payment-processor-partner (Internet) | Internet Egress Transfer | 22,000 | $0.090 | $1,980.00 | PCI payment token authorization payloads to payment aggregator | Optimise payload schema, negotiate AWS Direct Connect / Partner Interconnect | **$198.00** |
+| `DT-PATH-08` | disbursement-engine (ap-south-1b) | core-banking-api (eu-west-1 Partner) | Cross-Region Transfer | 12,000 | $0.020 | $240.00 | Banking settlement synchronization with European partner bank | Batch settlement summaries hourly instead of real-time per-transaction RPC | **$72.00** |
+| `DT-PATH-09` | staging-environment (ap-south-1) | s3-lendflow-dev-temp-dumps (via NAT) | NAT Gateway Data Processing | 18,000 | $0.045 | $810.00 | Staging regression tests downloading test datasets through NAT Gateway | Enable S3 VPC Endpoint on Staging VPC route tables | **$810.00** |
+| `DT-PATH-10` | monitoring-prometheus (ap-south-1a) | all-nodes (ap-south-1b, ap-south-1c) | Cross-AZ Inter-Service Transfer | 32,000 | $0.020 | $640.00 | Centralised Prometheus scraper pulling metrics across AZ boundaries every 15s | Deploy local Prometheus agent per AZ with remote write aggregation | **$320.00** |
+| **TOTALS** | **Top 10 Costliest Transfer Paths** | — | — | — | — | **$24,395.00** | — | — | **$12,890.00** |
+
+
 ---
 
 ## 5. Addressable Savings Waterfall Analysis

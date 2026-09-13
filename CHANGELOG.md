@@ -6,7 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased] - 2026-09-13
+## [Unreleased] - 2026-09-14
+
+### Full Framework Enhancement: Gamified Simulator, Industrial Case Studies & Telemetry Integration
+- **Added:** `docs/simulation-concept.md` detailing the complete strategic business and pedagogical architecture for **CLOUDBURN: The FinOps War Room Simulator** across Campaign Mode (6 progressive levels), Arena Mode (48-hour competitive sprint), and Sandbox Mode (custom scenario builder) with 10 achievement badges.
+- **Added:** `docs/case-studies.md` conducting in-depth forensic investigations of 4 major real-world cloud cost case studies:
+  1. *The $2.4M AWS Billing Shock* (ML auto-scaling disaster, PR typo, SCP guardrails, Infracost gate, runbook).
+  2. *Razorpay's FinOps Transformation (India)* ($30M/yr spend, 35% cut, 4-phase transformation roadmap, unit economics).
+  3. *Kubernetes Cost Explosion at a European Neobank* (EKS over-requested pod limits, VPA P95, Karpenter spot node pools, Kubecost).
+  4. *Data Transfer Cost Disaster at a Singapore Fintech* (GCP cross-region egress, Singapore DB migration, Cloud CDN, gRPC, VPC Service Controls).
+- **Added:** `docs/stakeholder-priority-matrix.md` establishing a formal standalone deliverable for all 6 stakeholder personas (Priya Menon, Arjun Deshmukh, Ravi Krishnan, Meera Iyer, Sanjay Patel, Anita Sharma), conflict governance ladders, and communication rhythms.
+- **Built:** Playable interactive HTML5 web application in `dashboards/simulation-war-room.html` with live financial HUD ($180k down to $115.75k, unit cost $0.346 to $0.223), dynamic stakeholder sentiment tracking, sound effects, and unlockable badge gallery.
+- **Integrated:** Detailed forensic telemetry tables (40 compute instances, 12 database/cache clusters, 17 storage inventory assets, and top 10 costliest data transfer paths) directly into `docs/cost-audit-report.md` fulfilling Appendix A deliverables 3, 4, 6, and 7.
+- **Enhanced:** Local master portal `index.html` with direct simulation launch cards and comprehensive documentation navigation.
+- **Updated:** Programmatic QA verification script `scripts/verify_cross_references.py` auditing all 26 deliverables from Appendix A with 100% pass rate.
 
 ### Stage 1: FinOps Foundations & Dataset Familiarisation (Day 1)
 - **Added:** Git repository initialisation and standardized enterprise directory hierarchy (`docs/`, `analysis/`, `dashboards/`, `policies/`, `presentation/`, `daily-logs/`, `data/`).

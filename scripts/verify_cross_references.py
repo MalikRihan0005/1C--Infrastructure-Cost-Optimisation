@@ -38,6 +38,10 @@ required_files = [
     "policies/terraform-cost-module/infracost.yml",
     "presentation/cfo-presentation.md",
     "presentation/cfo-presentation.html",
+    "docs/stakeholder-priority-matrix.md",
+    "docs/simulation-concept.md",
+    "docs/case-studies.md",
+    "dashboards/simulation-war-room.html",
     "daily-logs/day-01.md",
     "daily-logs/day-02.md",
     "daily-logs/day-03.md",
@@ -50,7 +54,9 @@ required_files = [
     "daily-logs/day-10.md",
     "daily-logs/day-11.md",
     "daily-logs/day-12.md",
-    "daily-logs/day-13.md"
+    "daily-logs/day-13.md",
+    "daily-logs/day-14.md",
+    "daily-logs/day-15.md"
 ]
 
 all_exist = True

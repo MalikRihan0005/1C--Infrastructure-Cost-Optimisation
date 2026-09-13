@@ -37,6 +37,9 @@ Under executive directive from CFO Priya Menon and CTO Arjun Deshmukh, this repo
 ├── docs/                               # Formal engineering & executive documentation
 │   ├── cost-audit-report.md            # Comprehensive AWS cost audit & waste discovery report
 │   ├── optimisation-recommendations.md # 16 prioritised recommendations with compliance assessments
+│   ├── simulation-concept.md           # CLOUDBURN Gamified War Room Simulator business concept & badges
+│   ├── case-studies.md                 # 4 industrial FinOps case studies ($2.4M shock, Razorpay, Neobank, Singapore)
+│   ├── stakeholder-priority-matrix.md  # 6-persona executive priority matrix & conflict governance
 │   ├── auto-scaling-policies.md        # Asymmetric & scheduled auto-scaling architectures
 │   ├── ri-spot-strategy.md             # Savings Plans, Reserved Instance & Spot procurement strategy
 │   ├── tagging-taxonomy.md             # 10-tag mandatory taxonomy & 4-layer enforcement model
@@ -48,7 +51,8 @@ Under executive directive from CFO Priya Menon and CTO Arjun Deshmukh, this repo
 │   ├── billing-analysis.xlsx           # 12-month billing trend, Pareto analysis & unit economics
 │   └── savings-model.xlsx              # Multi-tab financial savings model (Summary, Compute, DB, etc.)
 │
-├── dashboards/                         # Publication-quality interactive dashboard mockups
+├── dashboards/                         # Publication-quality interactive dashboard mockups & simulator
+│   ├── simulation-war-room.html        # Interactive CLOUDBURN Gamified War Room Simulator (Campaign, Arena, Sandbox)
 │   ├── executive-dashboard.html        # CFO/CTO executive strategic cost dashboard
 │   ├── engineering-dashboard.html      # Engineering Manager / Platform efficiency dashboard
 │   └── team-dashboard.html             # Microservice & team-level unit cost dashboard
