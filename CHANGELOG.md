@@ -44,3 +44,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Engineered:** 4-layer governance model (Preventive, Detective, Corrective, Audit & Showback) and proportional shared-cost allocation math.
 - **Authored:** `policies/scp-mandatory-tags.json` and `policies/config-rules.yaml`.
 - **Published:** `docs/tagging-taxonomy.md` and `daily-logs/day-05.md`.
+
+### Stage 6: Cost Anomaly Detection (Day 6)
+- **Audited:** 10 historical anomaly incidents in `data/cost_anomaly_events.csv` generating $31,512.80 in waste with average MTTD of 156.6 hours (6.5 days).
+- **Designed:** Hybrid 3-tier detection framework (Sub-hour CloudWatch proxy alarms, Lambda Modified Z-Score with salary-day surge awareness, and AWS ML Cost Anomaly Detection).
+- **Established:** 4-tier severity matrix (P1 Critical through P4 Low) with SLAs, automated PagerDuty/Slack routing, and 5-step operational Anomaly Investigation Runbook.
+- **Published:** `docs/anomaly-detection.md` and `daily-logs/day-06.md`.
